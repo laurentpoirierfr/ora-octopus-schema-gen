@@ -40,9 +40,15 @@ ORACLE_URL="oracle://${ORACLE_USER_NAME}:${ORACLE_USER_PASSWORD}@${ORACLE_HOSTNA
 cd examples
 make generate-schema
 make plantuml
+make dbml
 ```
 
 ![schema](examples/ora-model.png)
+
+* [./examples/ora-model.plantuml](./examples/ora-model.plantuml)
+* [./examples/ora-model.dbml](./examples/ora-model.dbml)
+
+
 
 ## References
 
