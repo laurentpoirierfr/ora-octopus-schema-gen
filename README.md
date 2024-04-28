@@ -43,11 +43,19 @@ make plantuml
 make dbml
 ```
 
-![schema](examples/ora-model.png)
+
+
+### https://www.plantuml.com/plantuml
 
 * [./examples/ora-model.plantuml](./examples/ora-model.plantuml)
+
+![schema](examples/ora-model.png)
+
+### https://dbdiagram.io
+
 * [./examples/ora-model.dbml](./examples/ora-model.dbml)
 
+![schema](examples/ora-model-dbml.png)
 
 
 ## References
