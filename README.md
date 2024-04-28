@@ -1,4 +1,14 @@
-# README
+# ora-octopus-schema-gen
+
+## Introduction
+
+Outil permettant de générer un fichier [octopus schema](https://github.com/lechuckroh/octopus-db-tool/blob/master/docs/octopus-format.md), schéma de base de données générique. 
+
+En se connectant à une base Oracle via :
+
+```bash
+ORACLE_URL="oracle://${ORACLE_USER_NAME}:${ORACLE_USER_PASSWORD}@${ORACLE_HOSTNAME}:${ORACLE_PORT}/${ORACLE_SERVICE_NAME}" 
+```
 
 ## Docker compose
 
