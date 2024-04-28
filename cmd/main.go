@@ -27,7 +27,7 @@ func main() {
 	DieIfError(err)
 	schema.Tables = tables
 
-	j, err := json.MarshalIndent(schema, "", "  ")
+	j, err := json.MarshalIndent(schema, "", "\t")
 	DieIfError(err)
 
 	fmt.Println(string(j))
