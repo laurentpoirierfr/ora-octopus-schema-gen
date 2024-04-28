@@ -1,0 +1,456 @@
+{
+  "author": "github.com/laurentpoirierfr/ora-octopus-schema-gen",
+  "version": "1.0.0",
+  "tables": [
+    {
+      "name": "CUSTOMERS",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "number",
+          "notnull": true,
+          "pk": true
+        },
+        {
+          "name": "email_address",
+          "type": "varchar2",
+          "size": 255,
+          "notnull": true
+        },
+        {
+          "name": "full_name",
+          "type": "varchar2",
+          "size": 255,
+          "notnull": true
+        }
+      ],
+      "indices": [
+        {
+          "name": "CUSTOMERS_PK",
+          "columns": [
+            "customer_id"
+          ]
+        },
+        {
+          "name": "CUSTOMERS_EMAIL_U",
+          "columns": [
+            "email_address"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "STORES",
+      "columns": [
+        {
+          "name": "store_id",
+          "type": "number",
+          "notnull": true,
+          "pk": true
+        },
+        {
+          "name": "store_name",
+          "type": "varchar2",
+          "size": 255,
+          "notnull": true
+        },
+        {
+          "name": "web_address",
+          "type": "varchar2",
+          "size": 100,
+          "notnull": true
+        },
+        {
+          "name": "physical_address",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "latitude",
+          "type": "number",
+          "notnull": true
+        },
+        {
+          "name": "longitude",
+          "type": "number",
+          "notnull": true
+        },
+        {
+          "name": "logo",
+          "type": "blob",
+          "notnull": true
+        },
+        {
+          "name": "logo_mime_type",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "logo_filename",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "logo_charset",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "logo_last_updated",
+          "type": "date",
+          "notnull": true
+        }
+      ],
+      "indices": [
+        {
+          "name": "STORES_PK",
+          "columns": [
+            "store_id"
+          ]
+        },
+        {
+          "name": "STORE_NAME_U",
+          "columns": [
+            "store_name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PRODUCTS",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "number",
+          "notnull": true,
+          "pk": true
+        },
+        {
+          "name": "product_name",
+          "type": "varchar2",
+          "size": 255,
+          "notnull": true
+        },
+        {
+          "name": "unit_price",
+          "type": "number",
+          "notnull": true
+        },
+        {
+          "name": "product_details",
+          "type": "blob",
+          "notnull": true
+        },
+        {
+          "name": "product_image",
+          "type": "blob",
+          "notnull": true
+        },
+        {
+          "name": "image_mime_type",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "image_filename",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "image_charset",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "image_last_updated",
+          "type": "date",
+          "notnull": true
+        }
+      ],
+      "indices": [
+        {
+          "name": "PRODUCTS_PK",
+          "columns": [
+            "product_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ORDERS",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "number",
+          "notnull": true,
+          "pk": true
+        },
+        {
+          "name": "order_tms",
+          "type": "timestamp(6)",
+          "notnull": true
+        },
+        {
+          "name": "customer_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "CUSTOMERS",
+            "column": "customer_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "order_status",
+          "type": "varchar2",
+          "size": 10,
+          "notnull": true
+        },
+        {
+          "name": "store_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "STORES",
+            "column": "store_id",
+            "relationship": "1:1"
+          }
+        }
+      ],
+      "indices": [
+        {
+          "name": "ORDERS_CUSTOMER_ID_I",
+          "columns": [
+            "customer_id"
+          ]
+        },
+        {
+          "name": "ORDERS_STORE_ID_I",
+          "columns": [
+            "store_id"
+          ]
+        },
+        {
+          "name": "ORDERS_PK",
+          "columns": [
+            "order_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SHIPMENTS",
+      "columns": [
+        {
+          "name": "shipment_id",
+          "type": "number",
+          "notnull": true,
+          "pk": true
+        },
+        {
+          "name": "store_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "STORES",
+            "column": "store_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "customer_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "CUSTOMERS",
+            "column": "customer_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "delivery_address",
+          "type": "varchar2",
+          "size": 512,
+          "notnull": true
+        },
+        {
+          "name": "shipment_status",
+          "type": "varchar2",
+          "size": 100,
+          "notnull": true
+        }
+      ],
+      "indices": [
+        {
+          "name": "SHIPMENTS_STORE_ID_I",
+          "columns": [
+            "store_id"
+          ]
+        },
+        {
+          "name": "SHIPMENTS_CUSTOMER_ID_I",
+          "columns": [
+            "customer_id"
+          ]
+        },
+        {
+          "name": "SHIPMENTS_PK",
+          "columns": [
+            "shipment_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ORDER_ITEMS",
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "ORDERS",
+            "column": "order_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "line_item_id",
+          "type": "number",
+          "notnull": true
+        },
+        {
+          "name": "product_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "PRODUCTS",
+            "column": "product_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "unit_price",
+          "type": "number",
+          "notnull": true
+        },
+        {
+          "name": "quantity",
+          "type": "number",
+          "notnull": true
+        },
+        {
+          "name": "shipment_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "SHIPMENTS",
+            "column": "shipment_id",
+            "relationship": "1:1"
+          }
+        }
+      ],
+      "indices": [
+        {
+          "name": "ORDER_ITEMS_PRODUCT_U",
+          "columns": [
+            "product_id"
+          ]
+        },
+        {
+          "name": "ORDER_ITEMS_PRODUCT_U",
+          "columns": [
+            "order_id"
+          ]
+        },
+        {
+          "name": "ORDER_ITEMS_SHIPMENT_ID_I",
+          "columns": [
+            "shipment_id"
+          ]
+        },
+        {
+          "name": "ORDER_ITEMS_PK",
+          "columns": [
+            "order_id"
+          ]
+        },
+        {
+          "name": "ORDER_ITEMS_PK",
+          "columns": [
+            "line_item_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "INVENTORY",
+      "columns": [
+        {
+          "name": "inventory_id",
+          "type": "number",
+          "notnull": true,
+          "pk": true
+        },
+        {
+          "name": "store_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "STORES",
+            "column": "store_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "product_id",
+          "type": "number",
+          "notnull": true,
+          "ref": {
+            "table": "PRODUCTS",
+            "column": "product_id",
+            "relationship": "1:1"
+          }
+        },
+        {
+          "name": "product_inventory",
+          "type": "number",
+          "notnull": true
+        }
+      ],
+      "indices": [
+        {
+          "name": "INVENTORY_PK",
+          "columns": [
+            "inventory_id"
+          ]
+        },
+        {
+          "name": "INVENTORY_STORE_PRODUCT_U",
+          "columns": [
+            "store_id"
+          ]
+        },
+        {
+          "name": "INVENTORY_STORE_PRODUCT_U",
+          "columns": [
+            "product_id"
+          ]
+        },
+        {
+          "name": "INVENTORY_PRODUCT_ID_I",
+          "columns": [
+            "product_id"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+@startuml
+entity CUSTOMERS {
+    * customer_id: number <<PK>>
+    --
+    * email_address: varchar2
+    * full_name: varchar2
+}
+entity INVENTORY {
+    * inventory_id: number <<PK>>
+    --
+    * store_id: number <<FK>>
+    * product_id: number <<FK>>
+    * product_inventory: number
+}
+entity ORDERS {
+    * order_id: number <<PK>>
+    --
+    * order_tms: timestamp(6)
+    * customer_id: number <<FK>>
+    * order_status: varchar2
+    * store_id: number <<FK>>
+}
+entity ORDER_ITEMS {
+    --
+    * order_id: number <<FK>>
+    * line_item_id: number
+    * product_id: number <<FK>>
+    * unit_price: number
+    * quantity: number
+    * shipment_id: number <<FK>>
+}
+entity PRODUCTS {
+    * product_id: number <<PK>>
+    --
+    * product_name: varchar2
+    * unit_price: number
+    * product_details: blob
+    * product_image: blob
+    * image_mime_type: varchar2
+    * image_filename: varchar2
+    * image_charset: varchar2
+    * image_last_updated: date
+}
+entity SHIPMENTS {
+    * shipment_id: number <<PK>>
+    --
+    * store_id: number <<FK>>
+    * customer_id: number <<FK>>
+    * delivery_address: varchar2
+    * shipment_status: varchar2
+}
+entity STORES {
+    * store_id: number <<PK>>
+    --
+    * store_name: varchar2
+    * web_address: varchar2
+    * physical_address: varchar2
+    * latitude: number
+    * longitude: number
+    * logo: blob
+    * logo_mime_type: varchar2
+    * logo_filename: varchar2
+    * logo_charset: varchar2
+    * logo_last_updated: date
+}
+INVENTORY ||-|| STORES
+INVENTORY ||-|| PRODUCTS
+ORDERS ||-|| CUSTOMERS
+ORDERS ||-|| STORES
+ORDER_ITEMS ||-|| ORDERS
+ORDER_ITEMS ||-|| PRODUCTS
+ORDER_ITEMS ||-|| SHIPMENTS
+SHIPMENTS ||-|| STORES
+SHIPMENTS ||-|| CUSTOMERS
+@enduml

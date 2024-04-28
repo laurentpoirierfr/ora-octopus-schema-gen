@@ -1,0 +1,70 @@
+Table CUSTOMERS {
+  customer_id number [pk, not null]
+  email_address varchar2(255) [not null]
+  full_name varchar2(255) [not null]
+}
+
+Table INVENTORY {
+  inventory_id number [pk, not null]
+  store_id number [not null]
+  product_id number [not null]
+  product_inventory number [not null]
+}
+
+Table ORDERS {
+  order_id number [pk, not null]
+  order_tms timestamp(6) [not null]
+  customer_id number [not null, ref: - CUSTOMERS.customer_id]
+  order_status varchar2(10) [not null]
+  store_id number [not null]
+}
+
+Table ORDER_ITEMS {
+  order_id number [not null, ref: - ORDERS.order_id]
+  line_item_id number [not null]
+  product_id number [not null]
+  unit_price number [not null]
+  quantity number [not null]
+  shipment_id number [not null]
+}
+
+Table PRODUCTS {
+  product_id number [pk, not null]
+  product_name varchar2(255) [not null]
+  unit_price number [not null]
+  product_details blob [not null]
+  product_image blob [not null]
+  image_mime_type varchar2(512) [not null]
+  image_filename varchar2(512) [not null]
+  image_charset varchar2(512) [not null]
+  image_last_updated date [not null]
+}
+
+Table SHIPMENTS {
+  shipment_id number [pk, not null]
+  store_id number [not null]
+  customer_id number [not null, ref: - CUSTOMERS.customer_id]
+  delivery_address varchar2(512) [not null]
+  shipment_status varchar2(100) [not null]
+}
+
+Table STORES {
+  store_id number [pk, not null]
+  store_name varchar2(255) [not null]
+  web_address varchar2(100) [not null]
+  physical_address varchar2(512) [not null]
+  latitude number [not null]
+  longitude number [not null]
+  logo blob [not null]
+  logo_mime_type varchar2(512) [not null]
+  logo_filename varchar2(512) [not null]
+  logo_charset varchar2(512) [not null]
+  logo_last_updated date [not null]
+}
+
+Ref: INVENTORY.store_id - STORES.store_id
+Ref: INVENTORY.product_id - PRODUCTS.product_id
+Ref: ORDERS.store_id - STORES.store_id
+Ref: ORDER_ITEMS.product_id - PRODUCTS.product_id
+Ref: ORDER_ITEMS.shipment_id - SHIPMENTS.shipment_id
+Ref: SHIPMENTS.store_id - STORES.store_id
