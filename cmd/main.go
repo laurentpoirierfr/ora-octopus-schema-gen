@@ -23,7 +23,7 @@ func main() {
 
 	schema.Author = "github.com/laurentpoirierfr/ora-octopus-schema-gen"
 	schema.Version = "1.0.0"
-	tables, err := listTablesSchema(conn, "demo")
+	tables, err := listTablesSchema(conn, os.Getenv("ORACLE_SCHEMA_NAME"))
 	DieIfError(err)
 	schema.Tables = tables
 
