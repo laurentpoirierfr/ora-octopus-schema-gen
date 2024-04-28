@@ -9,7 +9,5 @@ gorm:
 
 plantuml:
 	octopus-db-tools generate plantuml --input ora-model.json --output ora-model.plantuml 
-	plantuml ora-model.plantuml
-
 
 .PHONY: generate-schema dbml gorm plantuml 
