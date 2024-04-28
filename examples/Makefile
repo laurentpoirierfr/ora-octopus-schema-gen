@@ -1,3 +1,6 @@
+generate-schema:
+	cd ../cmd &&  go run main.go > ../examples/ora-model.json
+
 dbml:
 	octopus-db-tools export dbml --input ora-model.json --output ora-model.dbml
 
@@ -9,4 +12,4 @@ plantuml:
 	plantuml ora-model.plantuml
 
 
-.PHONY: dbml gorm	
+.PHONY: generate-schema dbml gorm plantuml 
